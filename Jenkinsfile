@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                gitCheckout("$gitRepoURL", "refs/heads/$gitBranchName", 'githubCred')
+                git branch: 'main' , url: 'https://github.com/asifkhazi/devops-final-project.git'
             }
         }
 
