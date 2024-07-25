@@ -5,11 +5,11 @@ pipeline {
         gitRepoURL = "${env.GIT_URL}"
         gitBranchName = "${env.BRANCH_NAME}"
         repoName = sh(script: "basename -s .git ${GIT_URL}", returnStdout: true).trim()
-        dockerImage = "227219889473.dkr.ecr.ap-south-1.amazonaws.com/${repoName}"
+        dockerImage = "891377304789.dkr.ecr.ap-south-2.amazonaws.com/${repoName}"
         branchName = sh(script: 'echo $BRANCH_NAME | sed "s#/#-#"', returnStdout: true).trim()
         gitCommit = "${GIT_COMMIT[0..6]}"
         dockerTag = "${branchName}-${gitCommit}"
-        snykOrg = "14141617-a2e0-4a4f-b558-dce1ea5cad2d"
+        snykOrg = "06661995-d0af-4e22-8ebb-c90e7e38f1d3"
         SCANNER_HOME=tool 'sonar-scanner'
     }
     
@@ -63,7 +63,7 @@ pipeline {
 
         stage('Docker Push') {
             steps {
-                dockerECRImagePush('$dockerImage', '$dockerTag', '$repoName', 'awsCred', 'ap-south-1')
+                dockerECRImagePush('$dockerImage', '$dockerTag', '$repoName', 'awsCred', 'ap-south-2')
             }
         }
 
@@ -72,7 +72,7 @@ pipeline {
                 branch 'development'
             }
             steps {
-                kubernetesEKSHelmDeployEnv('$dockerImage', '$dockerTag', '$repoName', 'awsCred', 'ap-south-1', 'eks-cluster', 'dev')
+                kubernetesEKSHelmDeployEnv('$dockerImage', '$dockerTag', '$repoName', 'awsCred', 'ap-south-2', 'eks-cluster', 'dev')
             }
         }
 
@@ -81,7 +81,7 @@ pipeline {
                 branch 'master_staging'
             }
             steps {
-                kubernetesEKSHelmDeployEnv('$dockerImage', '$dockerTag', '$repoName', 'awsCred', 'ap-south-1', 'eks-cluster', 'uat')
+                kubernetesEKSHelmDeployEnv('$dockerImage', '$dockerTag', '$repoName', 'awsCred', 'ap-south-2', 'eks-cluster', 'uat')
             }
         }
 
@@ -90,7 +90,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                kubernetesEKSHelmDeployEnv('$dockerImage', '$dockerTag', '$repoName', 'awsCred', 'ap-south-1', 'eks-cluster', 'prod')
+                kubernetesEKSHelmDeployEnv('$dockerImage', '$dockerTag', '$repoName', 'awsCred', 'ap-south-2', 'eks-cluster', 'prod')
             }
         }
 
