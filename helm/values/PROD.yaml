@@ -9,5 +9,4 @@ resource:
     limit: 2Gi
 environment:
   env: PROD
-  path: tetris.artisantek.in
 namespace: prod

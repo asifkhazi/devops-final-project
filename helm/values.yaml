@@ -1,8 +1,8 @@
 deployment:
-  name: devops-project-tetris
+  name: devops-final-project
   replicaCount: 1
 image:
-  account: 227219889473.dkr.ecr.ap-south-1.amazonaws.com
+  account: 891377304789.dkr.ecr.ap-south-2.amazonaws.com
   tag: 1
   containerPort: 3000
 service:
@@ -17,6 +17,4 @@ resource:
     limit: 300Mi
 environment:
   env: DEV
-  path: tetris.artisantek.in
 namespace: dev
-acmCertificateARN: arn:aws:acm:ap-south-1:227219889473:certificate/a83adc9c-27d3-4a95-af4a-3c16ecb22616

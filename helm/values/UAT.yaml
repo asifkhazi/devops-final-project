@@ -9,5 +9,4 @@ resource:
     limit: 2Gi
 environment:
   env: UAT
-  path: staging-tetris.artisantek.in
 namespace: uat

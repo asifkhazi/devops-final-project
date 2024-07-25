@@ -87,7 +87,7 @@ pipeline {
 
         stage('Kubernetes Deploy - PROD') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 kubernetesEKSHelmDeployEnv('$dockerImage', '$dockerTag', '$repoName', 'awsCred', 'ap-south-2', 'eks-cluster', 'prod')

@@ -9,5 +9,4 @@ resource:
     limit: 1Gi
 environment:
   env: DEV
-  path: dev-tetris.artisantek.in
 namespace: dev
